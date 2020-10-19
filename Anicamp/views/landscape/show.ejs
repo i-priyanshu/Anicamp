@@ -1,0 +1,69 @@
+<%- include ("../partials/header") %>
+<div class="container">   
+<div class="row">
+        <div class="col-md-3">
+            <div id="map"></div>
+        </div>
+    <div class="col-md-9">
+        <div class="card mb-3">  
+            <img class="card-img-top" src="<%=landscape.image %>" alt="<%= landscape.name%>">
+            <div class="card-body">
+                <p class="float-right">
+                    $<%=landscape.price%>/night
+                </p>
+                <h5 class="card-title"><a><%=landscape.name%></a></h5>
+                <p>
+                    <em>Submitted by: <%= landscape.author.username %></em>
+                </p>       
+                <hr>
+                <p class="card-text"><%=landscape.description %></p>
+                <% if(currentuser && landscape.author.id.equals(currentuser._id)) { %>
+                    <div class="form-inline">
+                    <a class="btn btn-sm btn-warning" href="/campgrounds/<%= landscape._id%>/edit">EDIT</a>
+                    <form class="delete-button" action="/campgrounds/<%= landscape._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-sm btn-danger">DELETE</button>
+                    </form>
+                 </div>
+                <% } %>
+                   
+            </div>
+         </div> 
+         <div class="card">
+             <div class="card-body">
+              <div class="text-right">
+                <a class="btn btn-success" href ="/campgrounds/<%= landscape._id%>/comments/new">Add new comments</a>
+            </div>
+            <hr>
+            <div class="row">
+            <% landscape.comments.forEach(function(comment){ %>
+                    <div class="col-md-12 mb-2"> 
+                         <div class="card">
+                             <div class="card-body">
+                                 <div class="float-left">
+                        <p class="card-title"><%= comment.author.username %></p>                 
+                        <p class="card-text"><%= comment.text %></p>
+                        </div>
+                        <div class="float-right">
+              <% if(currentuser && comment.author.id.equals(currentuser._id) || currentuser && currentuser.isAdmin) { %>
+                <div class="float-right form-inline">
+                <a class="btn btn-sm btn-warning" href="/campgrounds/<%= landscape._id %>/comments/<%=comment._id %>/edit">EDIT</a>
+        
+                <form class="delete-form delete-button" action="/campgrounds/<%= landscape._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">DELETE</button>
+                    <!-- <input type="submit" class="btn btn-sm btn-danger" value="Delete"> -->
+                </form>
+                </div>
+                <% } %> 
+            </div>
+          </div>
+        </div>
+       </div>
+            <% }) %>
+        </div>
+       </div>
+      </div>
+    </div>
+</div>
+</div>
+
+<%- include ("../partials/footer") %> 
