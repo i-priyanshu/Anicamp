@@ -1,10 +1,10 @@
 <%- include ("../partials/header") %>
 
 <div class="container">
-    <header class="jumbotron">
+    <header class="jumbotron text-center">
     <div class="container">
-    <h1>Welcome to ANICAMP!</h1>
-    <p>Post, Rate and Discuss the favourite of your Animes</p>
+    <h1 class="display-3">Welcome to ANICAMP!</h1>
+    <p class="lead">Post, Rate and Discuss the favourite of your Animes</p>
     <p>
         <a class="btn btn-primary btn-lg" href="/campgrounds/new"> Add a New Post</a>
     </p>   
@@ -13,18 +13,17 @@
 
 <div class="row text-center">
 <% campgrounds.forEach(function(campgrounds){ %>
-      
-        <div class= "col-lg-3 col-md-4 col-sm-6 mb-4"> 
-         <div class="card">
-          <img class="card-img-top" src="<%= campgrounds.image %>" alt="<%= campgrounds.name %>">
+        <div class= "col-lg-4 col-md-4 col-sm-6 mb-4"> 
+         <div class="card border-secondary" id="card">
+          <img class="card-img-top img-fluid" src="<%= campgrounds.image %>" alt="<%= campgrounds.name %>">
            <div class="card-body">
           <h5 class="card-title"><%= campgrounds.name %></h5>
-          <a href="/campgrounds/<%= campgrounds._id%>" class="btn btn-primary">More Info</a>
+          <a href="/campgrounds/<%= campgrounds._id%>" class="btn btn-outline-primary">More Info</a>
         </div>
       </div>   
     </div>
 <% }); %>
-    </div>
+  </div>
 </div>
 
 <%- include ("../partials/footer") %>
